@@ -1,35 +1,188 @@
-intents:
-  - greet
-  - goodbye
-  - affirm
-  - deny
-  - mood_great
-  - mood_unhappy
-  - bot_challenge
-
-actions:
-  - action_hello_world
-  
-responses:
-  utter_greet:
-  - text: "Hey! How are you?"
-
-  utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
-
-  utter_did_that_help:
-  - text: "Did that help you?"
-
-  utter_happy:
-  - text: "Great, carry on!"
-
-  utter_goodbye:
-  - text: "Bye"
-
-  utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
+version: "2.0"
 
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
+intents:
+- greet
+- goodbye
+- affirm
+- deny
+- active_form
+- inform
+- thankyou
+- out_of_scope
+- mint_student
+- gender_female
+- first_generation
+- migration_background
+- control_group
+- ask_for_group
+entities:
+- user_choice
+- salary
+slots:
+  10_min_salary:
+    type: text
+    auto_fill: false
+    influence_conversation: false
+  11_wish_salary:
+    type: text
+    auto_fill: false
+    influence_conversation: false
+  1_activity:
+    type: text
+    auto_fill: false
+    influence_conversation: false
+  2_outside:
+    type: text
+    auto_fill: false
+    influence_conversation: false
+  3_workingtime:
+    type: text
+    auto_fill: false
+    influence_conversation: false
+  4_environment:
+    type: text
+    auto_fill: false
+    influence_conversation: false
+  5_company:
+    type: text
+    auto_fill: false
+    influence_conversation: false
+  6_skills:
+    type: text
+    auto_fill: false
+    influence_conversation: false
+  7_personally:
+    type: text
+    auto_fill: false
+    influence_conversation: false
+  8_problems_dealing:
+    type: text
+    auto_fill: false
+    influence_conversation: false
+  9_public:
+    type: text
+    auto_fill: false
+    influence_conversation: false
+  requested_slot:
+    type: unfeaturized
+    influence_conversation: false
+responses:
+  utter_greet:
+  - text: Liebe Studentinnen und Studenten, vielen Dank für die Benutzung unserer
+      Job-Empfehlungssystem. Die Bearbeitungszeit der Fragen wird ca. 5-10 Minuten
+      in Anspruch nehmen. Wir bitten euch, die Frage so präzise und ehrlich wie möglich
+      zu beantworten. Bitte bestätige hier die Teilnahme- und die Datenschutzerklärung](https://drive.google.com/file/d/1cvAtIQwNDQjqs3Mzxa4jWzpuPGUTuOXG/view?usp=sharing).
+      (Ja/Nein)
+  utter_choose_group:
+  - buttons:
+    - payload: /mint_student
+      title: MINT-Student
+    - payload: /gender_female
+      title: Geschlecht:weiblich
+    - payload: /first_generation
+      title: First Generation
+    - payload: /migration_background
+      title: Migrationshintergrund
+    - payload: /control_group
+      title: Andere
+    text: "Du hast schon die Teilnahme- und die Datenschutzerklärung bestätigt!\n\
+      \ Zur welche Gruppe der Studierenden gehörst Du?"
+  utter_ask_enroll_survey:
+  - buttons:
+    - payload: /active_form
+      title: Jetzt starten
+    - payload: /deny
+      title: Vielleicht später
+    text: "In der Umfrage geht es um folgende Themen: Softskills, Arbeitsplatzanforderungen\
+      \ und Gehaltsvorstellung.\n Möchtest Du kurz die Umfragen teilnehmen?"
+  utter_goodbye:
+  - text: Auf Wiedersehen!
+  utter_ask_1_activity:
+  - text: "Wie schätzt Du folgenden Anforderungen mit Skala von 1 bis 5 ein?\n Abwechslungsreiche\
+      \ Tätigkeit, Herausfordernde Tätigkeit, Aufstiegsmöglichkeiten, Weiterbildungsmöglichkeiten"
+  utter_ask_2_outside:
+  - text: "Wie schätzt Du folgenden Anforderungen mit Skala von 1 bis 5 ein?\n Kundenkontakt,\
+      \ Dienstreisen, Gute Beziehung zu Vorgesetzten"
+  utter_ask_3_workingtime:
+  - text: "Wie schätzt Du folgenden Anforderungen mit Skala von 1 bis 5 ein?\n Flexible\
+      \ Arbeitszeit, Überstundenkonto, Arbeitszeiterfassung"
+  utter_ask_4_environment:
+  - text: "Wie schätzt Du folgenden Anforderungen mit Skala von 1 bis 5 ein?\n Lockere\
+      \ Arbeitsatmosphäre, Anbindung an öffentliche Verkehrsmittel, Kantine, moderne\
+      \ Büro"
+  utter_ask_5_company:
+  - text: "Wie schätzt Du folgenden Anforderungen mit Skala von 1 bis 5 ein?\n Innovatives\
+      \ Unternehmen, Etabliertes Unternehmen, Start-up"
+  utter_ask_6_skills:
+  - text: "Wie schätzt Du folgenden Fähigkeiten von sich selbst mit Skala von 1 bis\
+      \ 5 ein?\n Kommunikationsfähigkeit, Organisationsfähigkeit und Teamfähigkeit"
+  utter_ask_7_personally:
+  - text: "Wie schätzt Du folgenden persönliche Fähigkeiten von sich selbst mit Skala\
+      \ von 1 bis 5 ein?\n Lernbereitschaft, Neugier, Selbstdisziplin und analytisches\
+      \ Denkenvermögen"
+  utter_ask_8_problems_dealing:
+  - text: "Wie schätzt Du Deine Kompetenz in folgenden Situationen von sich selbst\
+      \ mit Skala von 1 bis 5 ein?\n Problemlösungskompetenz, Kritikfähigkeit, Stressresistenz"
+  utter_ask_9_public:
+  - text: "Wie schätzt Du folgenden Fähigkeiten von sich selbst mit Skala von 1 bis\
+      \ 5 ein?\n Integrationsbereitschaft, Präsentationsskills und Empathie"
+  utter_ask_10_min_salary:
+  - text: Was ist das geringes Jahresgehalt für Deinen ersten Beruf?
+  utter_ask_11_wish_salary:
+  - text: Was ist das Wunschgehalt für Deinen ersten Beruf?
+  utter_slots_values:
+  - text: "Vielen Dank für Mitmachen.  Hier ist eine kurze Zusammenfassung. Passen\
+      \ Deine Angabe soweit? :\n *Workplace:\n - Abwechslungsreiche Tätigkeit, Herausfordernde\
+      \ Tätigkeit, Aufstiegsmöglichkeiten, Weiterbildungsmöglichkeiten: {activity}\n\
+      \ - Kundenkontakt, Dienstreisen, Gute Beziehung zu Vorgesetzten: {outside}\n\
+      \ - Flexible Arbeitszeit, Überstundenkonto, Arbeitszeiterfassung: {workingtime}\n\
+      \ - Lockere Arbeitsatmosphäre, Anbindung an öffentliche Verkehrsmittel, Kantine,\
+      \ moderne Büro: {environment}\n - Innovative Unternehmen, Etabliertes Unternehmen,\
+      \ Start-up: {company}\n *Softskills:\n - Kommunikationsfähigkeit, Organisationsfähigkeit\
+      \ und Teamfähigkeit: {skills}\n - Lernbereitschaft, Neugier, Selbstdisziplin\
+      \ und analytisches Denkenvermögen: {personally}\n - Problemlösungskompetenz,\
+      \ Kritikfähigkeit, Stressresistenz: {problems_dealing}\n - Integrationsbereitschaft,\
+      \ Präsentationsskills und Empathie: {public}\n *Gehalt:\n - geringes Jahresgehalt:\
+      \ {min_salary}\n - Wunschgehalt: {wish_salary}"
+  utter_ask_continue:
+  - text: Entschuldigung! Ich habe dich nicht verstanden. Willst Du nochmal fortfahren?
+actions:
+- action_submit
+forms:
+  form_info:
+    10_min_salary:
+    - entity: salary
+      type: from_entity
+    11_wish_salary:
+    - entity: salary
+      type: from_entity
+    1_activity:
+    - entity: user_choice
+      type: from_entity
+    2_outside:
+    - entity: user_choice
+      type: from_entity
+    3_workingtime:
+    - entity: user_choice
+      type: from_entity
+    4_environment:
+    - entity: user_choice
+      type: from_entity
+    5_company:
+    - entity: user_choice
+      type: from_entity
+    6_skills:
+    - entity: user_choice
+      type: from_entity
+    7_personally:
+    - entity: user_choice
+      type: from_entity
+    8_problems_dealing:
+    - entity: user_choice
+      type: from_entity
+    9_public:
+    - entity: user_choice
+      type: from_entity

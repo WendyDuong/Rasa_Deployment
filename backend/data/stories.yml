@@ -1,0 +1,78 @@
+version: "2.0"
+
+stories:
+
+- story: AGB deny
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: deny
+  - action: utter_goodbye
+
+- story: survey happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: affirm
+  - action: utter_choose_group
+  - or:
+    - intent: mint_student
+    - intent: gender_female
+    - intent: first_generation
+    - intent: migration_background
+    - intent: control_group
+  - action: utter_ask_enroll_survey
+  - intent: active_form
+  - action: form_info
+  - active_loop: form_info
+  - active_loop: null
+  - action: action_submit
+  - or:
+    - intent: thankyou
+    - intent: affirm
+  - action: utter_goodbye
+
+- story: no survey
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: affirm
+  - action: utter_choose_group
+  - or:
+    - intent: mint_student
+    - intent: gender_female
+    - intent: first_generation
+    - intent: migration_background
+    - intent: control_group
+  - action: utter_ask_enroll_survey
+  - intent: deny
+  - action: utter_goodbye
+
+#- story: survey stop
+#  steps:
+#  - intent: greet
+#  - action: utter_greet
+#  - intent: affirm
+#  - action: utter_choose_group
+#  - or:
+#    - intent: mint_student
+#    - intent: gender_female
+#    - intent: first_generation
+#    - intent: migration_background
+#    - intent: control_group
+#  - action: utter_ask_enroll_survey
+#  - intent: active_form
+#  - action: form_info
+#  - active_loop: form_info
+#  - or:
+#    - intent: out_of_scope
+#    - intent: inform
+#      entities:
+#        - salary
+#  - action: utter_ask_continue
+#  - intent: deny
+#  - action: action_deactivate_loop
+#  - active_loop: null
+#  - action: utter_goodbye
+
+

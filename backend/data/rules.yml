@@ -1,0 +1,54 @@
+version: "2.0"
+
+rules:
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Active form
+  steps:
+  - intent: active_form
+  - action: form_info
+  - active_loop: form_info
+
+
+- rule: senerio of out of scope
+  condition:
+  # Condition that form is active.
+  - active_loop: form_info
+  steps:
+  - intent: out_of_scope
+  - action: utter_ask_continue
+
+- rule: senerio continue survey
+  condition:
+  # Condition that form is active.
+  - active_loop: form_info
+  steps:
+  - intent: affirm
+  - action: form_info
+  - active_loop: form_info
+
+- rule: senerio stop survey
+  condition:
+  # Condition that form is active.
+  - active_loop: form_info
+  steps:
+  - intent: deny
+  - action: action_deactivate_loop
+  - active_loop: null
+  - action: utter_goodbye
+
+- rule: Submit form
+  condition:
+  - active_loop: form_info
+  steps:
+  - action: form_info
+  - active_loop: null
+  - slot_was_set:
+      - requested_slot: null
+  - action: action_submit
+  - intent: affirm
+  - action: utter_goodbye
