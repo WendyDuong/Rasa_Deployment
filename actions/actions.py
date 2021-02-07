@@ -19,6 +19,9 @@ import numpy as np
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from csv import writer
+import os
+os.environ['MPLCONFIGDIR'] = "/tmp"
+import matplotlib
 
 
 # helper functions
